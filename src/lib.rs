@@ -1,18 +1,18 @@
-struct List<T> {
+pub struct List<T> {
     root: Option<Box<Node<T>>>,
 }
 
-struct Node<T> {
+pub struct Node<T> {
     value: T,
     next: Option<Box<Node<T>>>,
 }
 
 impl<T> List<T> {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Self { root: None }
     }
 
-    fn iter(&self) -> impl Iterator<Item = &T> {
+    pub fn iter(&self) -> impl Iterator<Item = &T> {
         struct Iter<'a, T> {
             node: Option<&'a Node<T>>,
         }
@@ -35,6 +35,7 @@ impl<T> List<T> {
     }
 }
 
+#[macro_export]
 macro_rules! list {
     ($($e:expr),*) => ({
         let mut values = vec![$($e),*];
